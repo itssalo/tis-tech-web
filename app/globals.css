@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/*
+ * DG TECH — Light Mode permanente
+ *
+ * La variante dark de Tailwind queda desactivada por defecto.
+ * Solo se activaría si agregáramos explícitamente una clase .dark.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* DG TECH — Light Theme */
+
+  /* Base */
+  --background: #faf8f5;
+  --foreground: #111111;
+
+  /* Surfaces */
+  --card: #ffffff;
+  --card-foreground: #111111;
+
+  /* Neutral */
+  --muted: #555555;
+  --border: #e5e2de;
+
+  /* Brand */
+  --primary: #ab1830;
+  --primary-hover: #8f1428;
+  --primary-foreground: #ffffff;
+
+  --secondary: #d2941f;
+  --secondary-hover: #b77d18;
+  --secondary-foreground: #030202;
+
+  /* Institutional */
+  --brand-black: #030202;
+  --brand-gray: #888787;
+
+  /* Soft brand backgrounds */
+  --primary-soft: #f8e7ea;
+  --secondary-soft: #fbf1dd;
+}
+
+@theme inline {
+  /* Base */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Surfaces */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  /* Neutral */
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+
+  /* Brand */
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  /* Institutional */
+  --color-brand-black: var(--brand-black);
+  --color-brand-gray: var(--brand-gray);
+
+  /* Soft brand backgrounds */
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary-soft: var(--secondary-soft);
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
