@@ -1,6 +1,12 @@
+"use client";
+
+import { useState } from "react";
+
 import { aboutInfo } from "@/data/about";
 
 export default function About() {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
   return (
     <section
       id="about"
@@ -16,7 +22,15 @@ export default function About() {
         </p>
 
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white dark:bg-zinc-900 p-8 rounded-2xl border border-slate-200 dark:border-zinc-800 hover:border-[#C41230] transition-all shadow-sm hover:shadow-lg">
+          <div
+            onMouseEnter={() => setHoveredCard(0)}
+            onMouseLeave={() => setHoveredCard(null)}
+            className="bg-white dark:bg-zinc-900 p-8 rounded-2xl border border-slate-200 dark:border-zinc-800 transition-all duration-300 shadow-sm hover:shadow-lg"
+            style={{
+              borderColor:
+                hoveredCard === 0 ? "#02A8E2" : undefined,
+            }}
+          >
             <h3 className="text-2xl font-semibold mb-4 text-slate-900 dark:text-white">
               Nuestro Compromiso
             </h3>
@@ -26,9 +40,17 @@ export default function About() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-zinc-900 p-8 rounded-2xl border border-slate-200 dark:border-zinc-800 hover:border-[#D99A00] transition-all shadow-sm hover:shadow-lg">
+          <div
+            onMouseEnter={() => setHoveredCard(1)}
+            onMouseLeave={() => setHoveredCard(null)}
+            className="bg-white dark:bg-zinc-900 p-8 rounded-2xl border border-slate-200 dark:border-zinc-800 transition-all duration-300 shadow-sm hover:shadow-lg"
+            style={{
+              borderColor:
+                hoveredCard === 1 ? "#F36454" : undefined,
+            }}
+          >
             <h3 className="text-2xl font-semibold mb-4 text-slate-900 dark:text-white">
-              ¿Por qué elegir DG TECH?
+              ¿Por qué elegir TIS TECH?
             </h3>
 
             <p className="text-slate-700 dark:text-slate-300 leading-relaxed">

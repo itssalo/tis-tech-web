@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -74,6 +77,11 @@ const technologies = [
 ];
 
 export default function AdvantechPage() {
+  const [hoveredSolution, setHoveredSolution] = useState<number | null>(null);
+  const [hoveredTechnology, setHoveredTechnology] = useState<number | null>(
+    null,
+  );
+
   return (
     <main className="min-h-screen bg-white text-slate-900 dark:bg-black dark:text-white">
       {/* Hero */}
@@ -81,8 +89,8 @@ export default function AdvantechPage() {
         <div className="mx-auto max-w-7xl">
           {/* Intro */}
           <div className="mb-10 text-center sm:mb-12">
-            <span className="mb-5 inline-flex items-center rounded-full bg-[#C41230]/10 px-4 py-2 text-sm font-semibold text-[#C41230] dark:bg-[#C41230]/20 dark:text-red-400">
-              Partner estratégico de DG TECH
+            <span className="mb-5 inline-flex items-center rounded-full bg-[#02A8E2]/10 px-4 py-2 text-sm font-semibold text-[#02A8E2] dark:bg-[#02A8E2]/20 dark:text-[#02A8E2]">
+              Partner estratégico de TIS TECH
             </span>
 
             <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
@@ -90,7 +98,7 @@ export default function AdvantechPage() {
             </h1>
 
             <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg md:text-xl">
-              Tecnologías y soluciones Advantech ofrecidas por DG TECH para
+              Tecnologías y soluciones Advantech ofrecidas por TIS TECH para
               aplicaciones industriales, conectividad, computación Edge e
               infraestructura tecnológica.
             </p>
@@ -115,7 +123,7 @@ export default function AdvantechPage() {
               </span>
 
               <span className="hidden text-xs font-medium uppercase tracking-wider text-white/70 sm:block">
-                Advantech × DG TECH
+                Advantech × TIS TECH
               </span>
             </div>
           </div>
@@ -127,7 +135,7 @@ export default function AdvantechPage() {
         <div className="mx-auto max-w-7xl">
           {/* Solutions intro */}
           <div className="mb-10 max-w-3xl sm:mb-12">
-            <span className="mb-3 block text-sm font-semibold uppercase tracking-wider text-[#C41230]">
+            <span className="mb-3 block text-sm font-semibold uppercase tracking-wider text-[#02A8E2]">
               Soluciones
             </span>
 
@@ -137,7 +145,7 @@ export default function AdvantechPage() {
 
             <p className="text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
               Soluciones tecnológicas Advantech que forman parte de la oferta
-              de DG TECH para distintos escenarios industriales y de negocio.
+              de TIS TECH para distintos escenarios industriales y de negocio.
             </p>
           </div>
 
@@ -160,18 +168,24 @@ export default function AdvantechPage() {
             {solutions.map((solution, index) => (
               <article
                 key={solution.number}
-                className={`group rounded-2xl border bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-zinc-900 ${
-                  index % 2 === 0
-                    ? "border-slate-200 hover:border-[#C41230] dark:border-zinc-800"
-                    : "border-slate-200 hover:border-[#D99A00] dark:border-zinc-800"
-                }`}
+                onMouseEnter={() => setHoveredSolution(index)}
+                onMouseLeave={() => setHoveredSolution(null)}
+                className="group rounded-2xl border border-slate-200 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900"
+                style={{
+                  borderColor:
+                    hoveredSolution === index
+                      ? index % 2 === 0
+                        ? "#02A8E2"
+                        : "#F36454"
+                      : undefined,
+                }}
               >
                 <div className="mb-6 flex items-center justify-between">
                   <span
                     className={`text-sm font-bold ${
                       index % 2 === 0
-                        ? "text-[#C41230]"
-                        : "text-[#D99A00]"
+                        ? "text-[#02A8E2]"
+                        : "text-[#F36454]"
                     }`}
                   >
                     {solution.number}
@@ -180,9 +194,7 @@ export default function AdvantechPage() {
                   <span className="ml-4 h-px flex-1 bg-slate-200 dark:bg-zinc-800" />
                 </div>
 
-                <h3 className="mb-3 text-xl font-bold">
-                  {solution.title}
-                </h3>
+                <h3 className="mb-3 text-xl font-bold">{solution.title}</h3>
 
                 <p className="leading-relaxed text-slate-600 dark:text-slate-400">
                   {solution.description}
@@ -197,7 +209,7 @@ export default function AdvantechPage() {
       <section className="px-6 py-20">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 text-center">
-            <span className="mb-3 block text-sm font-semibold uppercase tracking-wider text-[#D99A00]">
+            <span className="mb-3 block text-sm font-semibold uppercase tracking-wider text-[#F36454]">
               Portfolio tecnológico
             </span>
 
@@ -207,7 +219,7 @@ export default function AdvantechPage() {
 
             <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
               Categorías tecnológicas disponibles dentro de la propuesta de
-              DG TECH.
+              TIS TECH.
             </p>
           </div>
 
@@ -215,11 +227,17 @@ export default function AdvantechPage() {
             {technologies.map((technology, index) => (
               <article
                 key={technology.title}
-                className={`group overflow-hidden rounded-2xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-zinc-900 ${
-                  index % 2 === 0
-                    ? "border-slate-200 hover:border-[#C41230] dark:border-zinc-800"
-                    : "border-slate-200 hover:border-[#D99A00] dark:border-zinc-800"
-                }`}
+                onMouseEnter={() => setHoveredTechnology(index)}
+                onMouseLeave={() => setHoveredTechnology(null)}
+                className="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900"
+                style={{
+                  borderColor:
+                    hoveredTechnology === index
+                      ? index % 2 === 0
+                        ? "#02A8E2"
+                        : "#F36454"
+                      : undefined,
+                }}
               >
                 {/* Product image */}
                 <div className="relative flex h-52 items-center justify-center overflow-hidden bg-slate-50 dark:bg-white">
@@ -238,8 +256,8 @@ export default function AdvantechPage() {
                     <span
                       className={`h-2 w-2 rounded-full ${
                         index % 2 === 0
-                          ? "bg-[#C41230]"
-                          : "bg-[#D99A00]"
+                          ? "bg-[#02A8E2]"
+                          : "bg-[#F36454]"
                       }`}
                     />
 
@@ -264,8 +282,8 @@ export default function AdvantechPage() {
 
       {/* CTA */}
       <section className="px-6 pb-20 pt-4">
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-[#C41230]/20 bg-[#C41230]/5 px-6 py-12 text-center dark:border-[#C41230]/30 dark:bg-[#C41230]/10 sm:px-10">
-          <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-[#C41230] dark:text-red-400">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-primary/20 bg-primary/5 px-6 py-12 text-center dark:border-primary/30 dark:bg-primary/10 sm:px-10">
+          <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-primary">
             ¿Tenés un proyecto?
           </span>
 
@@ -274,15 +292,15 @@ export default function AdvantechPage() {
           </h2>
 
           <p className="mx-auto mb-8 max-w-2xl leading-relaxed text-slate-600 dark:text-slate-400">
-            Contactá a DG TECH para analizar tu necesidad y encontrar la
+            Contactá a TIS TECH para analizar tu necesidad y encontrar la
             solución Advantech adecuada para tu entorno.
           </p>
 
           <Link
             href="/#contact"
-            className="inline-flex items-center rounded-xl bg-[#C41230] px-7 py-3.5 font-semibold text-white transition-all duration-300 hover:bg-[#a30f28] hover:shadow-lg"
+            className="inline-flex items-center rounded-xl bg-primary px-7 py-3.5 font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover hover:shadow-lg"
           >
-            Contactar con DG TECH
+            Contactar con TIS TECH
             <span className="ml-2 transition-transform duration-300 hover:translate-x-1">
               →
             </span>
@@ -294,7 +312,7 @@ export default function AdvantechPage() {
       <div className="px-6 pb-16 text-center">
         <Link
           href="/#partners"
-          className="inline-flex items-center font-medium text-[#C41230] transition-colors hover:text-[#a30f28] dark:text-red-400 dark:hover:text-red-300"
+          className="inline-flex items-center font-medium text-primary transition-colors hover:text-primary-hover"
         >
           ← Volver a Socios Estratégicos
         </Link>

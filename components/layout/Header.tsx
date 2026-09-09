@@ -222,11 +222,11 @@ export default function HomeSection({
         <div className="mt-12 flex justify-center lg:mt-16">
           <a
             href="#about"
-            aria-label="Desplazarse a la sección Sobre DG TECH"
+            aria-label="Desplazarse a la sección Sobre TIS TECH"
             className="group flex flex-col items-center gap-2 text-foreground/50 transition-colors hover:text-primary"
           >
             <span className="text-xs font-medium uppercase tracking-wider">
-              Conocé DG TECH
+              Conocé TIS TECH
             </span>
 
             <span className="flex h-9 w-6 items-start justify-center rounded-full border border-current p-1.5">

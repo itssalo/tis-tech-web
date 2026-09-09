@@ -1,6 +1,12 @@
+"use client";
+
+import { useState } from "react";
+
 import { solutions } from "@/data/solutions";
 
 export default function Solutions() {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
   return (
     <section
       id="solutions"
@@ -21,11 +27,17 @@ export default function Solutions() {
           {solutions.map((solution, index) => (
             <div
               key={solution.title}
-              className={`bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
-                index % 2 === 0
-                  ? "hover:border-[#C41230]"
-                  : "hover:border-[#D99A00]"
-              }`}
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
+              className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              style={{
+                borderColor:
+                  hoveredCard === index
+                    ? index % 2 === 0
+                      ? "#02A8E2"
+                      : "#F36454"
+                    : undefined,
+              }}
             >
               <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
                 {solution.title}

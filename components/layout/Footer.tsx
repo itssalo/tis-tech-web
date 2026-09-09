@@ -6,6 +6,7 @@ const footerLinks = [
   { label: "Soluciones", href: "#solutions" },
   { label: "Socios", href: "#partners" },
   { label: "Productos", href: "#products" },
+  { label: "Países", href: "#countries" },
   { label: "Contacto", href: "#contact" },
 ];
 
@@ -58,9 +59,10 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-border">
-          <p className="text-sm text-foreground/50 text-center">
-            DG TECH SRL | CUIT 30-71633398-8
-          </p>
+          <div className="text-sm text-foreground/50 text-center space-y-1">
+            <p>TIS TECH SOLUTIONS LLC.</p>
+            <p>1057 NW 136th Ave, Miami, FL 33182</p>
+          </div>
         </div>
       </div>
     </footer>

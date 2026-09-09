@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,7 +22,16 @@ const generalSolutions = [
 ];
 
 export default function Partners() {
+  const [hoveredOtherPartner, setHoveredOtherPartner] = useState<number | null>(
+    null,
+  );
+
+  const [hoveredSolution, setHoveredSolution] = useState<number | null>(null);
+
+  const [isAdvantechHovered, setIsAdvantechHovered] = useState(false);
+
   const advantech = partners.find((partner) => partner.name === "Advantech");
+
   const otherPartners = partners.filter(
     (partner) => partner.name !== "Advantech",
   );
@@ -32,7 +44,7 @@ export default function Partners() {
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="mx-auto mb-16 max-w-4xl text-center">
-          <span className="mb-4 inline-flex items-center rounded-full border border-[#C41230]/20 bg-[#C41230]/5 px-4 py-2 text-sm font-semibold text-[#C41230] dark:border-[#C41230]/30 dark:bg-[#C41230]/10 dark:text-red-400">
+          <span className="mb-4 inline-flex items-center rounded-full border border-[#02A8E2]/20 bg-[#02A8E2]/5 px-4 py-2 text-sm font-semibold text-[#02A8E2] dark:border-[#02A8E2]/30 dark:bg-[#02A8E2]/10 dark:text-sky-400">
             Alianzas tecnológicas
           </span>
 
@@ -51,14 +63,21 @@ export default function Partners() {
         {advantech && (
           <Link
             href="/partners/advantech"
-            className="group mb-14 block overflow-hidden rounded-3xl border border-[#C41230]/30 bg-white shadow-lg transition-all duration-500 hover:-translate-y-1 hover:border-[#C41230] hover:shadow-2xl dark:border-[#C41230]/40 dark:bg-zinc-950"
-            aria-label="Ver soluciones Advantech ofrecidas por DG TECH"
+            onMouseEnter={() => setIsAdvantechHovered(true)}
+            onMouseLeave={() => setIsAdvantechHovered(false)}
+            className="group mb-14 block overflow-hidden rounded-3xl border border-[#02A8E2]/30 bg-white shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl dark:border-[#02A8E2]/40 dark:bg-zinc-950"
+            style={{
+              borderColor: isAdvantechHovered
+                ? "#02A8E2"
+                : undefined,
+            }}
+            aria-label="Ver soluciones Advantech ofrecidas por TIS TECH"
           >
             <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
               {/* Content */}
               <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-14">
                 <div className="mb-6 flex flex-wrap items-center gap-3">
-                  <span className="inline-flex items-center rounded-full bg-[#C41230] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white">
+                  <span className="inline-flex items-center rounded-full bg-[#02A8E2] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white">
                     Partner estratégico
                   </span>
 
@@ -72,7 +91,7 @@ export default function Partners() {
                 </h3>
 
                 <p className="mb-8 max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
-                  Somos distribuidores autorizados de Advantech. 
+                  Somos distribuidores autorizados de Advantech.
                 </p>
 
                 <div className="mb-8 flex flex-wrap gap-2">
@@ -91,7 +110,7 @@ export default function Partners() {
                   ))}
                 </div>
 
-                <div className="inline-flex items-center font-semibold text-[#C41230] transition-colors group-hover:text-[#8f1428] dark:text-red-400 dark:group-hover:text-red-300">
+                <div className="inline-flex items-center font-semibold text-[#02A8E2] transition-colors group-hover:text-[#008fc4] dark:text-sky-400 dark:group-hover:text-sky-300">
                   Explorar soluciones Advantech
                   <span className="ml-2 text-lg transition-transform duration-300 group-hover:translate-x-1">
                     →
@@ -120,7 +139,7 @@ export default function Partners() {
         <div className="mb-20">
           <div className="mb-8 flex items-end justify-between gap-6">
             <div>
-              <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#D99A00]">
+              <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#F36454]">
                 Nuestra red tecnológica
               </p>
 
@@ -134,11 +153,17 @@ export default function Partners() {
             {otherPartners.map((partner, index) => (
               <article
                 key={partner.name}
-                className={`group rounded-2xl border bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-zinc-900 ${
-                  index % 2 === 0
-                    ? "border-slate-200 hover:border-[#C41230] dark:border-zinc-800"
-                    : "border-slate-200 hover:border-[#D99A00] dark:border-zinc-800"
-                }`}
+                onMouseEnter={() => setHoveredOtherPartner(index)}
+                onMouseLeave={() => setHoveredOtherPartner(null)}
+                className="group rounded-2xl border border-slate-200 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900"
+                style={{
+                  borderColor:
+                    hoveredOtherPartner === index
+                      ? index % 2 === 0
+                        ? "#02A8E2"
+                        : "#F36454"
+                      : undefined,
+                }}
               >
                 <div className="mb-7 flex h-32 items-center justify-center rounded-xl bg-slate-50 px-6 dark:bg-white">
                   <div className="relative h-full w-full">
@@ -168,7 +193,7 @@ export default function Partners() {
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 dark:border-zinc-800 dark:bg-zinc-950">
           <div className="p-8 sm:p-10 lg:p-12">
             <div className="mx-auto mb-10 max-w-3xl text-center">
-              <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-wider text-[#C41230]">
+              <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-wider text-[#02A8E2]">
                 Capacidades
               </span>
 
@@ -187,15 +212,21 @@ export default function Partners() {
               {generalSolutions.map((item, index) => (
                 <div
                   key={item}
-                  className={`group flex items-center gap-3 rounded-xl border bg-white px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:bg-zinc-900 ${
-                    index % 2 === 0
-                      ? "border-slate-200 hover:border-[#C41230] dark:border-zinc-800"
-                      : "border-slate-200 hover:border-[#D99A00] dark:border-zinc-800"
-                  }`}
+                  onMouseEnter={() => setHoveredSolution(index)}
+                  onMouseLeave={() => setHoveredSolution(null)}
+                  className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900"
+                  style={{
+                    borderColor:
+                      hoveredSolution === index
+                        ? index % 2 === 0
+                          ? "#02A8E2"
+                          : "#F36454"
+                        : undefined,
+                  }}
                 >
                   <span
                     className={`flex h-2 w-2 shrink-0 rounded-full ${
-                      index % 2 === 0 ? "bg-[#C41230]" : "bg-[#D99A00]"
+                      index % 2 === 0 ? "bg-[#02A8E2]" : "bg-[#F36454]"
                     }`}
                   />
 

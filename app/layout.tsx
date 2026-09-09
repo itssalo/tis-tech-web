@@ -12,21 +12,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://www.dgtechargentina.com";
+const siteUrl = "https://www.tistechsolutions.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "DG TECH | Soluciones Tecnológicas",
-    template: "%s | DG TECH",
+    default: "TIS TECH | Soluciones Tecnológicas",
+    template: "%s | TIS TECH",
   },
 
   description:
-    "DG TECH integra tecnología y servicios para empresas e industrias, ofreciendo soluciones de infraestructura, conectividad, seguridad y tecnología industrial.",
+    "TIS TECH integra tecnología y servicios para empresas e industrias, ofreciendo soluciones de infraestructura, conectividad, seguridad y tecnología industrial.",
 
   keywords: [
-    "DG TECH",
+    "TIS TECH",
     "soluciones tecnológicas",
     "infraestructura tecnológica",
     "conectividad industrial",
@@ -39,12 +39,12 @@ export const metadata: Metadata = {
 
   authors: [
     {
-      name: "DG TECH",
+      name: "TIS TECH",
     },
   ],
 
-  creator: "DG TECH",
-  publisher: "DG TECH",
+  creator: "TIS TECH",
+  publisher: "TIS TECH",
 
   alternates: {
     canonical: "/",
@@ -59,16 +59,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_AR",
     url: "/",
-    title: "DG TECH | Soluciones Tecnológicas",
+    title: "TIS TECH | Soluciones Tecnológicas",
     description:
-      "DG TECH integra tecnología y servicios para empresas e industrias.",
-    siteName: "DG TECH",
+      "TIS TECH integra tecnología y servicios para empresas e industrias.",
+    siteName: "TIS TECH",
     images: [
       {
-        url: "/brand/dgtech-og.png",
-        width: 1670,
-        height: 942,
-        alt: "DG TECH",
+        url: "/brand/tistech.jpg",
+        width: 150,
+        height: 54,
+        alt: "TIS TECH SOLUTIONS",
       },
     ],
   },

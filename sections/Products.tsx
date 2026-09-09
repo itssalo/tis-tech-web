@@ -1,10 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 
 import { productAreas, productBrands } from "@/data/products";
 
 export default function Products() {
+  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
+  const [hoveredBrand, setHoveredBrand] = useState<number | null>(null);
+
   const handleProductClick = (area: string) => {
     sessionStorage.setItem("selectedProduct", area);
 
@@ -42,11 +46,17 @@ export default function Products() {
               key={area}
               type="button"
               onClick={() => handleProductClick(area)}
-              className={`bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-5 text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer ${
-                index % 2 === 0
-                  ? "hover:border-[#C41230]"
-                  : "hover:border-[#D99A00]"
-              }`}
+              onMouseEnter={() => setHoveredProduct(index)}
+              onMouseLeave={() => setHoveredProduct(null)}
+              className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl p-5 text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
+              style={{
+                borderColor:
+                  hoveredProduct === index
+                    ? index % 2 === 0
+                      ? "#02A8E2"
+                      : "#F36454"
+                    : undefined,
+              }}
             >
               <span className="font-medium text-slate-800 dark:text-slate-200">
                 {area}
@@ -70,11 +80,17 @@ export default function Products() {
             {productBrands.map((brand, index) => (
               <div
                 key={brand.name}
-                className={`bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 min-h-36 flex items-center justify-center transition-all duration-300 hover:shadow-lg ${
-                  index % 2 === 0
-                    ? "hover:border-[#C41230]"
-                    : "hover:border-[#D99A00]"
-                }`}
+                onMouseEnter={() => setHoveredBrand(index)}
+                onMouseLeave={() => setHoveredBrand(null)}
+                className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-6 min-h-36 flex items-center justify-center transition-all duration-300 hover:shadow-lg"
+                style={{
+                  borderColor:
+                    hoveredBrand === index
+                      ? index % 2 === 0
+                        ? "#02A8E2"
+                        : "#F36454"
+                      : undefined,
+                }}
               >
                 <div className="relative w-full h-28 rounded-xl dark:bg-white dark:px-6 dark:py-4">
                   <Image

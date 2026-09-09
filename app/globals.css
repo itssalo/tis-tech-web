@@ -1,44 +1,42 @@
 @import "tailwindcss";
 
 /*
- * DG TECH — Light Mode permanente
+ * TIS TECH SOLUTIONS — Light Mode
  *
- * La variante dark de Tailwind queda desactivada por defecto.
- * Solo se activaría si agregáramos explícitamente una clase .dark.
+ * Identidad visual basada en el logo oficial de TIS TECH.
  */
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* DG TECH — Light Theme */
-
   /* Base */
-  --background: #faf8f5;
-  --foreground: #111111;
+  --background: #ffffff;
+  --foreground: #343a40;
 
   /* Surfaces */
   --card: #ffffff;
-  --card-foreground: #111111;
+  --card-foreground: #343a40;
 
   /* Neutral */
-  --muted: #555555;
-  --border: #e5e2de;
+  --muted: #6f7b84;
+  --border: #e1e6ea;
 
-  /* Brand */
-  --primary: #ab1830;
-  --primary-hover: #8f1428;
+  /* TIS TECH Brand */
+  --primary: #02a8e2;
+  --primary-hover: #008fc4;
   --primary-foreground: #ffffff;
 
-  --secondary: #d2941f;
-  --secondary-hover: #b77d18;
-  --secondary-foreground: #030202;
+  --secondary: #f36454;
+  --secondary-hover: #dc5143;
+  --secondary-foreground: #ffffff;
 
   /* Institutional */
-  --brand-black: #030202;
-  --brand-gray: #888787;
+  --brand-gray: #8a98a3;
+  --brand-dark: #343a40;
 
   /* Soft brand backgrounds */
-  --primary-soft: #f8e7ea;
-  --secondary-soft: #fbf1dd;
+  --primary-soft: #e6f7fc;
+  --secondary-soft: #fdebe8;
 }
 
 @theme inline {
@@ -64,8 +62,8 @@
   --color-secondary-foreground: var(--secondary-foreground);
 
   /* Institutional */
-  --color-brand-black: var(--brand-black);
   --color-brand-gray: var(--brand-gray);
+  --color-brand-dark: var(--brand-dark);
 
   /* Soft brand backgrounds */
   --color-primary-soft: var(--primary-soft);
