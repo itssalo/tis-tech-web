@@ -98,8 +98,8 @@ export default function Navbar() {
             <Image
               src="/brand/tistech.svg"
               alt="TIS TECH"
-              width={135}
-              height={45}
+              width={120}
+              height={42}
               priority
               className="h-auto w-[115px] sm:w-[135px] md:w-[155px] object-contain"
             />
