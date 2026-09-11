@@ -12,7 +12,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://www.tistechsolutions.com";
+// TESTING EN VERCEL
+// Cuando TIS TECH pase a producción, cambiar nuevamente a:
+// https://www.tistechsolutions.com
+const siteUrl = "https://tis-tech-web.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -37,12 +40,7 @@ export const metadata: Metadata = {
     "tecnología industrial",
   ],
 
-  authors: [
-    {
-      name: "TIS TECH",
-    },
-  ],
-
+  authors: [{ name: "TIS TECH" }],
   creator: "TIS TECH",
   publisher: "TIS TECH",
 
@@ -65,12 +63,20 @@ export const metadata: Metadata = {
     siteName: "TIS TECH",
     images: [
       {
-        url: "/brand/tistech.jpg",
-        width: 150,
-        height: 54,
-        alt: "TIS TECH SOLUTIONS",
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "TIS TECH | Soluciones Tecnológicas",
       },
     ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "TIS TECH | Soluciones Tecnológicas",
+    description:
+      "TIS TECH integra tecnología y servicios para empresas e industrias.",
+    images: ["/opengraph-image"],
   },
 };
 
