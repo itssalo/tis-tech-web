@@ -3,6 +3,8 @@
 import { FormEvent, useEffect, useState } from "react";
 import { contactInfo } from "@/data/contact";
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeaqdlnn";
+
 const productAreas = [
   "Storage",
   "Networking",
@@ -53,7 +55,7 @@ export default function Contact() {
     const formData = new FormData(form);
 
     try {
-      const response = await fetch("https://formspree.io/f/xeajnkev", {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         body: formData,
         headers: {
@@ -142,6 +144,12 @@ export default function Contact() {
 
           <div className="lg:col-span-2 bg-card border border-border rounded-2xl p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
+              <input
+                type="hidden"
+                name="_subject"
+                value="Nueva consulta desde TIS TECH"
+              />
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label
