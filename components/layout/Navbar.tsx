@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { useEffect, useState } from "react"
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Inicio", href: "#inicio" },
@@ -11,128 +11,177 @@ const navItems = [
   { label: "Productos", href: "#products" },
   { label: "Países", href: "#countries" },
   { label: "Contacto", href: "#contact" },
-]
+];
 
 export default function Navbar() {
-  const [activeSection, setActiveSection] = useState("inicio")
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("inicio");
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems
-        .map((item) => document.querySelector(item.href))
-        .filter(Boolean)
+      const navbarHeight = 80;
+      const activationPoint = navbarHeight + 40;
 
-      const scrollPosition = window.scrollY + 140
-      let currentSection = "inicio"
+      let currentSection = "inicio";
 
-      sections.forEach((section) => {
-        if (section instanceof HTMLElement && section.offsetTop <= scrollPosition) {
-          currentSection = section.id
+      for (const item of navItems) {
+        const sectionId = item.href.replace("#", "");
+        const section = document.getElementById(sectionId);
+
+        if (!section) {
+          continue;
         }
-      })
 
-      setActiveSection(currentSection)
+        const sectionTop = section.getBoundingClientRect().top;
+
+        if (sectionTop <= activationPoint) {
+          currentSection = sectionId;
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
+  const handleNavigation = (sectionId: string) => {
+    setActiveSection(sectionId);
+    setIsOpen(false);
+
+    const section = document.getElementById(sectionId);
+
+    if (!section) {
+      return;
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll()
+    const navbarHeight = 80;
 
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    const targetPosition =
+      section.getBoundingClientRect().top +
+      window.scrollY -
+      navbarHeight;
 
-  const handleNavClick = (href: string) => {
-    setIsMenuOpen(false)
+    window.scrollTo({
+      top: Math.max(0, targetPosition),
+      behavior: "smooth",
+    });
 
-    const target = document.querySelector(href)
-
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" })
-    }
-  }
+    window.history.replaceState(null, "", `#${sectionId}`);
+  };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-      <nav
-        className="mx-auto flex h-[90px] max-w-7xl items-center justify-between px-6 lg:px-8"
-        aria-label="Navegación principal"
-      >
-        <button
-          type="button"
-          onClick={() => handleNavClick("#inicio")}
-          className="flex items-center"
-          aria-label="Ir al inicio"
-        >
-          <Image
-            src="/brand/tistech.svg"
-            alt="TIS TECH SOLUTIONS"
-            width={135}
-            height={74}
-            className="h-[62px] w-auto object-contain"
-            priority
-          />
-        </button>
+    <nav
+      aria-label="Navegación principal"
+      className="fixed top-0 left-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="flex h-16 items-center justify-between md:h-20">
+          {/* Logo */}
+          <button
+            type="button"
+            onClick={() => handleNavigation("inicio")}
+            aria-label="TIS TECH - Ir al inicio"
+            className="flex shrink-0 items-center"
+          >
+            <Image
+              src="/brand/tistech.svg"
+              alt="TIS TECH"
+              width={140}
+              height={50}
+              priority
+              className="h-auto w-[115px] sm:w-[135px] md:w-[155px] object-contain"
+            />
+          </button>
 
-        <div className="hidden items-center gap-8 lg:flex">
-          {navItems.map((item) => {
-            const sectionId = item.href.replace("#", "")
-            const isActive = activeSection === sectionId
-
-            return (
-              <button
-                key={item.href}
-                type="button"
-                onClick={() => handleNavClick(item.href)}
-                className={`relative py-2 text-sm font-medium transition-colors ${
-                  isActive ? "text-primary" : "text-muted hover:text-primary"
-                }`}
-              >
-                {item.label}
-
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 mx-auto h-0.5 w-full bg-secondary" />
-                )}
-              </button>
-            )
-          })}
-        </div>
-
-        <button
-          type="button"
-          className="flex h-10 w-10 items-center justify-center text-2xl text-foreground lg:hidden"
-          onClick={() => setIsMenuOpen((open) => !open)}
-          aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={isMenuOpen}
-        >
-          {isMenuOpen ? "✕" : "☰"}
-        </button>
-      </nav>
-
-      {isMenuOpen && (
-        <div className="border-t border-border bg-background px-6 py-4 lg:hidden">
-          <div className="flex flex-col gap-2">
+          {/* Desktop navigation */}
+          <div className="hidden items-center gap-8 md:flex">
             {navItems.map((item) => {
-              const sectionId = item.href.replace("#", "")
-              const isActive = activeSection === sectionId
+              const sectionId = item.href.replace("#", "");
+              const isActive = activeSection === sectionId;
 
               return (
                 <button
                   key={item.href}
                   type="button"
-                  onClick={() => handleNavClick(item.href)}
-                  className={`rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors ${
+                  onClick={() => handleNavigation(sectionId)}
+                  aria-current={isActive ? "location" : undefined}
+                  className={`relative py-2 text-[15px] font-medium transition-colors ${
                     isActive
-                      ? "bg-primary-soft text-primary"
-                      : "text-muted hover:bg-primary-soft hover:text-primary"
+                      ? "text-primary"
+                      : "text-foreground/70 hover:text-primary"
                   }`}
                 >
                   {item.label}
+
+                  {isActive && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-secondary"
+                    />
+                  )}
                 </button>
-              )
+              );
             })}
           </div>
+
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-xl text-foreground transition-colors hover:bg-foreground/5 md:hidden"
+          >
+            <span aria-hidden="true">
+              {isOpen ? "✕" : "☰"}
+            </span>
+          </button>
         </div>
-      )}
-    </header>
-  )
+
+        {/* Mobile navigation */}
+        {isOpen && (
+          <div
+            id="mobile-navigation"
+            className="border-t border-border py-3 md:hidden"
+          >
+            <div className="flex flex-col gap-2">
+              {navItems.map((item) => {
+                const sectionId = item.href.replace("#", "");
+                const isActive = activeSection === sectionId;
+
+                return (
+                  <button
+                    key={item.href}
+                    type="button"
+                    onClick={() => handleNavigation(sectionId)}
+                    aria-current={isActive ? "location" : undefined}
+                    className={`rounded-lg px-3 py-2.5 text-left text-[15px] font-medium transition-colors ${
+                      isActive
+                        ? "bg-primary/10 text-primary"
+                        : "text-foreground/70 hover:bg-foreground/5 hover:text-primary"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
 }
