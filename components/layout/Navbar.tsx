@@ -101,7 +101,7 @@ export default function Navbar() {
               width={120}
               height={42}
               priority
-              className="h-auto w-[115px] sm:w-[135px] md:w-[155px] object-contain"
+              className="h-[42px] w-auto object-contain sm:h-[46px] md:h-[50px]"
             />
           </button>
 
