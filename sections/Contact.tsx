@@ -3,7 +3,24 @@
 import { FormEvent, useEffect, useState } from "react";
 import { contactInfo } from "@/data/contact";
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeaqdlnn";
+const countries = [
+  "Argentina",
+  "Bolivia",
+  "Chile",
+  "Colombia",
+  "Costa Rica",
+  "Ecuador",
+  "El Salvador",
+  "Estados Unidos",
+  "Guatemala",
+  "Honduras",
+  "Nicaragua",
+  "Panamá",
+  "Paraguay",
+  "Perú",
+  "República Dominicana",
+  "Uruguay",
+];
 
 const productAreas = [
   "Storage",
@@ -22,6 +39,8 @@ const productAreas = [
   "Computadoras industriales",
   "Conectividad celular",
 ];
+
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeaqdln";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -150,6 +169,7 @@ export default function Contact() {
                 value="Nueva consulta desde TIS TECH"
               />
 
+              {/* Nombre / Empresa */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -187,6 +207,7 @@ export default function Contact() {
                 </div>
               </div>
 
+              {/* Email / Teléfono */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -224,31 +245,62 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div>
-                <label
-                  htmlFor="product"
-                  className="block text-sm font-medium text-foreground mb-2"
-                >
-                  Área de interés
-                </label>
+              {/* País / Área de interés */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    htmlFor="country"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
+                    País
+                  </label>
 
-                <select
-                  id="product"
-                  name="product"
-                  value={selectedProduct}
-                  onChange={(event) => setSelectedProduct(event.target.value)}
-                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                >
-                  <option value="">Seleccioná un área</option>
-
-                  {productAreas.map((area) => (
-                    <option key={area} value={area}>
-                      {area}
+                  <select
+                    id="country"
+                    name="country"
+                    required
+                    defaultValue=""
+                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  >
+                    <option value="" disabled>
+                      Seleccioná tu país
                     </option>
-                  ))}
-                </select>
+
+                    {countries.map((country) => (
+                      <option key={country} value={country}>
+                        {country}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="product"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
+                    Área de interés
+                  </label>
+
+                  <select
+                    id="product"
+                    name="product"
+                    value={selectedProduct}
+                    onChange={(event) => setSelectedProduct(event.target.value)}
+                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  >
+                    <option value="">Seleccioná un área</option>
+
+                    {productAreas.map((area) => (
+                      <option key={area} value={area}>
+                        {area}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
+              {/* Mensaje */}
               <div>
                 <label
                   htmlFor="message"
@@ -267,6 +319,7 @@ export default function Contact() {
                 />
               </div>
 
+              {/* Error */}
               {error && (
                 <div
                   role="alert"
@@ -276,6 +329,7 @@ export default function Contact() {
                 </div>
               )}
 
+              {/* Submit */}
               <button
                 type="submit"
                 disabled={isSubmitting}

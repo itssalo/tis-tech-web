@@ -6,6 +6,7 @@ import About from "@/sections/About";
 import Solutions from "@/sections/Solutions";
 import Partners from "@/sections/Partners";
 import Products from "@/sections/Products";
+import Countries from "@/sections/Countries";
 import Contact from "@/sections/Contact";
 
 import { companyInfo } from "@/data/company";
@@ -30,6 +31,8 @@ export default function Home() {
         <Partners />
 
         <Products />
+
+        <Countries />
 
         <Contact />
       </main>
