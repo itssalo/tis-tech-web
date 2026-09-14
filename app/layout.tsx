@@ -12,10 +12,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// TESTING EN VERCEL
-// Cuando TIS TECH pase a producción, cambiar nuevamente a:
-// https://www.tistechsolutions.com
-const siteUrl = "https://tis-tech-web.vercel.app";
+
+const siteUrl = "https://www.tistechsolutions.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
