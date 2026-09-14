@@ -9,31 +9,18 @@ import Products from "@/sections/Products";
 import Countries from "@/sections/Countries";
 import Contact from "@/sections/Contact";
 
-import { companyInfo } from "@/data/company";
-
 export default function Home() {
   return (
     <>
       <Navbar />
 
       <main>
-        <HomeSection
-          title={companyInfo.name}
-          subtitle={companyInfo.slogan}
-          description={companyInfo.description}
-          cta={companyInfo.cta}
-        />
-
+        <HomeSection />
         <About />
-
         <Solutions />
-
         <Partners />
-
         <Products />
-
         <Countries />
-
         <Contact />
       </main>
 

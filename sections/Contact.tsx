@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { contactInfo } from "@/data/contact";
+import { useTranslations } from "next-intl";
 
-const countries = [
+const countryKeys = [
   "Argentina",
   "Bolivia",
   "Chile",
@@ -11,48 +11,59 @@ const countries = [
   "Costa Rica",
   "Ecuador",
   "El Salvador",
-  "Estados Unidos",
+  "United States",
   "Guatemala",
   "Honduras",
   "Nicaragua",
-  "Panamá",
+  "Panama",
   "Paraguay",
-  "Perú",
-  "República Dominicana",
+  "Peru",
+  "Dominican Republic",
   "Uruguay",
-];
+] as const;
 
-const productAreas = [
-  "Storage",
-  "Networking",
-  "Datacenter",
-  "UPS",
-  "Cableado estructurado",
-  "Seguridad",
-  "Wireless",
-  "Provisión de equipamiento informático",
-  "Capacitaciones e Implementaciones",
-  "Telecomunicaciones",
-  "FTTH – GPON",
-  "Conectividad industrial",
-  "IIOT",
-  "Computadoras industriales",
-  "Conectividad celular",
-];
+const productAreaKeys = [
+  "storage",
+  "networking",
+  "datacenter",
+  "ups",
+  "structuredCabling",
+  "security",
+  "wireless",
+  "itEquipment",
+  "trainingImplementation",
+  "telecommunications",
+  "ftthGpon",
+  "industrialConnectivity",
+  "iiot",
+  "industrialComputers",
+  "cellularConnectivity",
+] as const;
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeaqdln";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeaqdlnn";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState("");
   const [selectedProduct, setSelectedProduct] = useState("");
+
+  const t = useTranslations("contact");
+
+  const countries = t.raw("countries") as string[];
+  const productAreas = t.raw("productAreas") as string[];
 
   useEffect(() => {
     const handleProductSelected = (event: Event) => {
       const customEvent = event as CustomEvent<string>;
 
-      if (customEvent.detail) {
+      if (!customEvent.detail) return;
+
+      const productIndex = productAreas.indexOf(customEvent.detail);
+
+      if (productIndex >= 0 && productAreas[productIndex]) {
+        setSelectedProduct(productAreas[productIndex]);
+      } else {
         setSelectedProduct(customEvent.detail);
       }
     };
@@ -62,16 +73,18 @@ export default function Contact() {
     return () => {
       window.removeEventListener("productSelected", handleProductSelected);
     };
-  }, []);
+  }, [productAreas]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setIsSubmitting(true);
-    setError(false);
+    setError("");
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+
+    formData.append("_subject", t("subject"));
 
     try {
       const response = await fetch(FORMSPREE_ENDPOINT, {
@@ -82,101 +95,114 @@ export default function Contact() {
         },
       });
 
-      if (!response.ok) {
-        throw new Error("Error al enviar el formulario");
+      if (response.ok) {
+        setIsSubmitted(true);
+        form.reset();
+        setSelectedProduct("");
+      } else {
+        setError(t("error"));
       }
-
-      form.reset();
-      setSelectedProduct("");
-      setSubmitted(true);
     } catch {
-      setError(true);
+      setError(t("error"));
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (submitted) {
+  if (isSubmitted) {
     return (
-      <section id="contact" className="py-24 px-6 bg-background">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="bg-primary-soft border border-primary rounded-2xl p-10">
-            <div
-              className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white text-2xl"
+      <section
+        id="contact"
+        className="border-t border-border bg-background px-6 py-20 sm:py-24"
+      >
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="h-8 w-8"
               aria-hidden="true"
             >
-              ✓
-            </div>
-
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Consulta enviada correctamente
-            </h2>
-
-            <p className="text-lg text-foreground/70 leading-relaxed mb-8">
-              Nos pondremos en contacto contigo a la brevedad.
-            </p>
-
-            <button
-              type="button"
-              onClick={() => setSubmitted(false)}
-              className="inline-block px-8 py-4 rounded-xl bg-primary text-white font-semibold hover:bg-secondary hover:text-foreground transition-all duration-300 hover:shadow-lg"
-            >
-              Enviar otra consulta
-            </button>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m5 12 4 4L19 6"
+              />
+            </svg>
           </div>
+
+          <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+            {t("successTitle")}
+          </h2>
+
+          <p className="mb-8 text-base leading-relaxed text-muted sm:text-lg">
+            {t("successDescription")}
+          </p>
+
+          <button
+            type="button"
+            onClick={() => {
+              setIsSubmitted(false);
+              setError("");
+            }}
+            className="inline-flex items-center rounded-xl bg-primary px-7 py-3.5 font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover hover:shadow-lg"
+          >
+            {t("sendAnother")}
+          </button>
         </div>
       </section>
     );
   }
 
   return (
-    <section id="contact" className="py-24 px-6 bg-background">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            {contactInfo.title}
-          </h2>
+    <section
+      id="contact"
+      className="border-t border-border bg-background px-6 py-20 sm:py-24"
+    >
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          {/* Contact information */}
+          <div>
+            <span className="mb-3 block text-sm font-semibold uppercase tracking-wider text-secondary">
+              {t("eyebrow")}
+            </span>
 
-          <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-            {contactInfo.description}
-          </p>
-        </div>
+            <h2 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl">
+              {t("title")}
+            </h2>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="bg-secondary-soft dark:bg-zinc-900 border border-border rounded-2xl p-8">
-            <h3 className="text-2xl font-semibold text-foreground mb-6">
-              Hablemos
-            </h3>
-
-            <p className="text-foreground/70 leading-relaxed mb-8">
-              Estamos disponibles para conocer tus necesidades y analizar
-              oportunidades de colaboración.
+            <p className="mb-8 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+              {t("intro")}
             </p>
 
-            <a
-              href={`mailto:${contactInfo.email}`}
-              className="text-primary font-medium hover:text-secondary transition-colors"
-            >
-              {contactInfo.email}
-            </a>
+            <div className="rounded-2xl border border-border bg-card p-6">
+              <div className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+                Email
+              </div>
+
+              <a
+                href={`mailto:${t("email")}`}
+                className="break-all text-lg font-medium text-foreground transition-colors hover:text-primary"
+              >
+                {t("email")}
+              </a>
+            </div>
           </div>
 
-          <div className="lg:col-span-2 bg-card border border-border rounded-2xl p-8">
+          {/* Contact form */}
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
-              <input
-                type="hidden"
-                name="_subject"
-                value="Nueva consulta desde TIS TECH"
-              />
-
-              {/* Nombre / Empresa */}
-              <div className="grid md:grid-cols-2 gap-6">
+              {/* Name / Company */}
+              <div className="grid gap-6 sm:grid-cols-2">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-foreground mb-2"
+                    className="mb-2 block text-sm font-semibold text-foreground"
                   >
-                    Nombre
+                    {t("name")}
                   </label>
 
                   <input
@@ -184,37 +210,37 @@ export default function Contact() {
                     name="name"
                     type="text"
                     required
-                    placeholder="Tu nombre"
-                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    placeholder={t("namePlaceholder")}
+                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-all placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="company"
-                    className="block text-sm font-medium text-foreground mb-2"
+                    className="mb-2 block text-sm font-semibold text-foreground"
                   >
-                    Empresa
+                    {t("company")}
                   </label>
 
                   <input
                     id="company"
                     name="company"
                     type="text"
-                    placeholder="Nombre de tu empresa"
-                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    placeholder={t("companyPlaceholder")}
+                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-all placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
                   />
                 </div>
               </div>
 
-              {/* Email / Teléfono */}
-              <div className="grid md:grid-cols-2 gap-6">
+              {/* Email / Phone */}
+              <div className="grid gap-6 sm:grid-cols-2">
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-foreground mb-2"
+                    className="mb-2 block text-sm font-semibold text-foreground"
                   >
-                    Email
+                    {t("emailLabel")}
                   </label>
 
                   <input
@@ -222,37 +248,37 @@ export default function Contact() {
                     name="email"
                     type="email"
                     required
-                    placeholder="tu@email.com"
-                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    placeholder={t("emailPlaceholder")}
+                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-all placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="phone"
-                    className="block text-sm font-medium text-foreground mb-2"
+                    className="mb-2 block text-sm font-semibold text-foreground"
                   >
-                    Teléfono
+                    {t("phone")}
                   </label>
 
                   <input
                     id="phone"
                     name="phone"
                     type="tel"
-                    placeholder="Tu teléfono"
-                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    placeholder={t("phonePlaceholder")}
+                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-all placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
                   />
                 </div>
               </div>
 
-              {/* País / Área de interés */}
-              <div className="grid md:grid-cols-2 gap-6">
+              {/* Country / Interest */}
+              <div className="grid gap-6 sm:grid-cols-2">
                 <div>
                   <label
                     htmlFor="country"
-                    className="block text-sm font-medium text-foreground mb-2"
+                    className="mb-2 block text-sm font-semibold text-foreground"
                   >
-                    País
+                    {t("country")}
                   </label>
 
                   <select
@@ -260,14 +286,14 @@ export default function Contact() {
                     name="country"
                     required
                     defaultValue=""
-                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
                   >
                     <option value="" disabled>
-                      Seleccioná tu país
+                      {t("countryPlaceholder")}
                     </option>
 
-                    {countries.map((country) => (
-                      <option key={country} value={country}>
+                    {countries.map((country, index) => (
+                      <option key={countryKeys[index]} value={country}>
                         {country}
                       </option>
                     ))}
@@ -276,23 +302,28 @@ export default function Contact() {
 
                 <div>
                   <label
-                    htmlFor="product"
-                    className="block text-sm font-medium text-foreground mb-2"
+                    htmlFor="interest"
+                    className="mb-2 block text-sm font-semibold text-foreground"
                   >
-                    Área de interés
+                    {t("interest")}
                   </label>
 
                   <select
-                    id="product"
-                    name="product"
+                    id="interest"
+                    name="interest"
+                    required
                     value={selectedProduct}
-                    onChange={(event) => setSelectedProduct(event.target.value)}
-                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    onChange={(event) =>
+                      setSelectedProduct(event.target.value)
+                    }
+                    className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20"
                   >
-                    <option value="">Seleccioná un área</option>
+                    <option value="" disabled>
+                      {t("interestPlaceholder")}
+                    </option>
 
-                    {productAreas.map((area) => (
-                      <option key={area} value={area}>
+                    {productAreas.map((area, index) => (
+                      <option key={productAreaKeys[index]} value={area}>
                         {area}
                       </option>
                     ))}
@@ -300,22 +331,22 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Mensaje */}
+              {/* Message */}
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-foreground mb-2"
+                  className="mb-2 block text-sm font-semibold text-foreground"
                 >
-                  Mensaje
+                  {t("message")}
                 </label>
 
                 <textarea
                   id="message"
                   name="message"
-                  rows={6}
                   required
-                  placeholder="Contanos sobre tu proyecto o consulta..."
-                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary resize-none"
+                  rows={6}
+                  placeholder={t("messagePlaceholder")}
+                  className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-all placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
                 />
               </div>
 
@@ -323,9 +354,9 @@ export default function Contact() {
               {error && (
                 <div
                   role="alert"
-                  className="rounded-xl border border-primary bg-primary-soft px-4 py-3 text-sm text-foreground"
+                  className="rounded-xl border border-secondary/30 bg-secondary/5 px-4 py-3 text-sm text-secondary"
                 >
-                  No pudimos enviar tu consulta. Por favor, intentá nuevamente.
+                  {error}
                 </div>
               )}
 
@@ -333,9 +364,9 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full md:w-auto px-8 py-4 rounded-xl bg-primary text-white font-semibold hover:bg-secondary hover:text-foreground transition-all duration-300 hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+                className="inline-flex w-full items-center justify-center rounded-xl bg-primary px-7 py-3.5 font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
               >
-                {isSubmitting ? "Enviando..." : "Enviar consulta"}
+                {isSubmitting ? t("sending") : t("submit")}
               </button>
             </form>
           </div>

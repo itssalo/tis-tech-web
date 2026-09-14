@@ -1,0 +1,323 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "solutions": "Solutions",
+    "partners": "Partners",
+    "products": "Products",
+    "countries": "Countries",
+    "contact": "Contact",
+    "language": "Language",
+    "spanish": "Español",
+    "english": "English"
+  },
+  "hero": {
+    "badge": "Technology solutions for industries",
+    "label": "Technology · Connectivity · Industry",
+    "cta": "Request Consultation",
+    "secondaryCta": "Explore Solutions",
+    "scrollLabel": "Scroll to the About TIS TECH section",
+    "scrollText": "Discover TIS TECH",
+    "videoAriaLabel": "Technology and industrial automation",
+    "iosImageAlt": "Industrial automation and applied technology"
+  },
+  "company": {
+    "name": "TIS TECH",
+    "slogan": "We Integrate Technology to Transform Businesses",
+    "description": "We connect companies and industries with first-class technology solutions, supporting every stage of the process: assessment, consulting, implementation, and support.",
+    "cta": "Request Consultation"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "TIS TECH provides IT solutions by integrating technology and related services. We act as the link connecting leading technology companies with users and industries across different markets.",
+    "commitmentTitle": "Our Commitment",
+    "commitment": "We support our clients throughout their technology transformation processes through innovative, reliable, and scalable solutions.",
+    "visionTitle": "Why Choose TIS TECH?",
+    "vision": "We are a recognized strategic partner integrating first-class technologies that drive the growth and efficiency of our clients."
+  },
+  "solutions": {
+    "title": "Solutions",
+    "description": "We integrate connectivity, infrastructure, and industrial automation technologies to support our clients' digital transformation.",
+    "items": {
+      "industrialServers": {
+        "title": "Industrial Servers",
+        "description": "From industrial servers to storage systems, we strengthen your infrastructure to improve efficiency and reliability in every operation. With TIS TECH, your technology and security are in expert hands."
+      },
+      "security": {
+        "title": "Security",
+        "description": "Industrial security is our primary concern. Beyond connectivity, we provide advanced solutions, including surveillance systems and redundancy approaches. We are committed to ensuring safe and reliable operations in any industrial environment."
+      },
+      "industrialConnectivity": {
+        "title": "Industrial Connectivity",
+        "description": "We lead the industrial connectivity revolution. From intelligent transportation systems to surveillance networks, we provide specialized solutions that transform the way companies operate. With us, you can experience the secure and efficient connectivity your critical industrial environment needs."
+      },
+      "wirelessConnectivity": {
+        "title": "Wireless Connectivity",
+        "description": "Explore the freedom of wireless connectivity. From enterprise Wi-Fi networks to remote connectivity solutions, we provide flexible options that eliminate cable limitations while bringing agility and efficiency to your infrastructure."
+      },
+      "iiot": {
+        "title": "IIOT",
+        "description": "Discover the potential of IIOT. We integrate technologies that enable communication and data exchange between industrial devices, providing real-time information for more informed and efficient decision-making in your industrial environment."
+      },
+      "cellularConnectivity": {
+        "title": "Cellular Connectivity",
+        "description": "Take connectivity to new horizons with advanced cellular solutions. From 4G networks to emerging technologies, we connect you reliably and efficiently, ensuring your company stays connected regardless of location or time."
+      }
+    }
+  },
+  "partners": {
+    "eyebrow": "Technology Partnerships",
+    "title": "Strategic Partners",
+    "description": "We work alongside internationally recognized manufacturers and technology leaders to provide reliable, secure, and scalable solutions for critical industries.",
+    "advantechAriaLabel": "View Advantech solutions offered by TIS TECH",
+    "partnerLabel": "Strategic Partner",
+    "advantechDescription": "We are authorized distributors of Advantech.",
+    "advantechTags": [
+      "Industrial Computing",
+      "Edge AI",
+      "IoT",
+      "Networking"
+    ],
+    "advantechCta": "Explore Advantech Solutions",
+    "advantechImageAlt": "Advantech product portfolio",
+    "networkEyebrow": "Our Technology Network",
+    "networkTitle": "Other Technology Partners",
+    "partnerLogoAlt": "{name} logo",
+    "capabilitiesEyebrow": "Capabilities",
+    "capabilitiesTitle": "Solutions We Drive Together with Our Partners",
+    "capabilitiesDescription": "We combine technology, infrastructure, and expertise to develop solutions tailored to the needs of each industry.",
+    "generalSolutions": {
+      "intelligentTransportation": "Intelligent Transportation Systems",
+      "energyManagement": "Energy Management",
+      "industrialAutomation": "Industrial Automation",
+      "smartFactories": "Smart Factories",
+      "digitalHealthcare": "Digital Healthcare Systems",
+      "smartLogistics": "Smart Logistics",
+      "industrialServers": "Industrial Servers",
+      "telecommunicationsInfrastructure": "Telecommunications Infrastructure",
+      "industrialEquipmentManufacturing": "Industrial Equipment Manufacturing",
+      "edgeComputing": "Edge Computing for IoT",
+      "smartRetail": "Smart Retail",
+      "videoSolutions": "Video Solutions"
+    }
+  },
+  "partnerData": {
+    "advantech": {
+      "name": "Advantech",
+      "description": "Authorized Advantech distributors - Specialists in industrial computing, IoT, edge computing, and integrated solutions for healthcare, logistics, energy, and automation."
+    },
+    "hpe": {
+      "name": "Aruba Networks & Hewlett Packard Enterprise (HPE)",
+      "description": "Leaders in enterprise connectivity, high-performance wireless networks, technology infrastructure, servers, and storage for modern corporate environments."
+    },
+    "adata": {
+      "name": "ADATA",
+      "description": "Global manufacturer of memory and storage solutions, offering high-performance technologies for infrastructure, computing, and enterprise environments."
+    }
+  },
+  "products": {
+    "title": "Product Portfolio",
+    "description": "We specialize in technology solutions covering infrastructure, connectivity, security, and equipment for companies and industries.",
+    "brandsTitle": "Associated Brands",
+    "brandsDescription": "We work with manufacturers and technology leaders to provide reliable solutions tailored to the needs of each project.",
+    "areas": {
+      "storage": "Storage",
+      "networking": "Networking",
+      "datacenter": "Datacenter",
+      "ups": "UPS",
+      "structuredCabling": "Structured Cabling",
+      "security": "Security",
+      "wireless": "Wireless",
+      "itEquipment": "IT Equipment Provision",
+      "trainingImplementation": "Training & Implementation",
+      "telecommunications": "Telecommunications",
+      "ftthGpon": "FTTH – GPON",
+      "industrialConnectivity": "Industrial Connectivity",
+      "iiot": "IIOT",
+      "industrialComputers": "Industrial Computers",
+      "cellularConnectivity": "Cellular Connectivity"
+    }
+  },
+  "countries": {
+    "title": "Countries",
+    "description": "We work with companies and industries across different markets around the world.",
+    "items": [
+      "Argentina",
+      "Bolivia",
+      "Chile",
+      "Colombia",
+      "Costa Rica",
+      "Ecuador",
+      "El Salvador",
+      "United States",
+      "Guatemala",
+      "Honduras",
+      "Nicaragua",
+      "Panama",
+      "Paraguay",
+      "Peru",
+      "Dominican Republic",
+      "Uruguay"
+    ],
+    "ctaEyebrow": "Do you operate in any of these markets?",
+    "ctaTitle": "Let's Talk About Your Next Project",
+    "ctaDescription": "Contact us to learn more about our solutions and explore how we can support your company's needs.",
+    "ctaButton": "Contact TIS TECH"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Do you have a project or need technology consulting? Contact us and our team will help you find the right solution for your company.",
+    "email": "ventas@tistechsolutions.com",
+    "successTitle": "Inquiry sent successfully",
+    "successDescription": "We will get in touch with you shortly.",
+    "sendAnother": "Send another inquiry",
+    "eyebrow": "Let's Talk",
+    "intro": "We are available to learn about your needs and explore opportunities for collaboration.",
+    "subject": "New inquiry from TIS TECH",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "company": "Company",
+    "companyPlaceholder": "Your company name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "phone": "Phone",
+    "phonePlaceholder": "Your phone number",
+    "country": "Country",
+    "countryPlaceholder": "Select your country",
+    "interest": "Area of Interest",
+    "interestPlaceholder": "Select an area",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about your project or inquiry...",
+    "error": "We could not send your inquiry. Please try again.",
+    "sending": "Sending...",
+    "submit": "Send Inquiry",
+    "countries": [
+      "Argentina",
+      "Bolivia",
+      "Chile",
+      "Colombia",
+      "Costa Rica",
+      "Ecuador",
+      "El Salvador",
+      "United States",
+      "Guatemala",
+      "Honduras",
+      "Nicaragua",
+      "Panama",
+      "Paraguay",
+      "Peru",
+      "Dominican Republic",
+      "Uruguay"
+    ],
+    "productAreas": [
+      "Storage",
+      "Networking",
+      "Datacenter",
+      "UPS",
+      "Structured Cabling",
+      "Security",
+      "Wireless",
+      "IT Equipment Provision",
+      "Training & Implementation",
+      "Telecommunications",
+      "FTTH – GPON",
+      "Industrial Connectivity",
+      "IIOT",
+      "Industrial Computers",
+      "Cellular Connectivity"
+    ]
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "email": "ventas@tistechsolutions.com",
+    "company": "TIS TECH SOLUTIONS LLC.",
+    "address": "1057 NW 136th Ave, Miami, FL 33182",
+    "links": {
+      "about": "About Us",
+      "solutions": "Solutions",
+      "partners": "Partners",
+      "products": "Products",
+      "countries": "Countries",
+      "contact": "Contact"
+    }
+  },
+  "seo": {
+    "title": "TIS TECH | Technology Solutions",
+    "description": "TIS TECH integrates technology and services for companies and industries, offering infrastructure, connectivity, security, and industrial technology solutions."
+  },
+  "advantech": {
+    "hero": {
+      "badge": "TIS TECH Strategic Partner",
+      "description": "Advantech technologies and solutions offered by TIS TECH for industrial applications, connectivity, Edge computing and technology infrastructure.",
+      "portfolioAlt": "Advantech solutions and products portfolio",
+      "portfolioCaption": "Industrial technology for a smarter world"
+    },
+    "solutions": {
+      "eyebrow": "Solutions",
+      "title": "Technology applied to different industries",
+      "description": "Advantech technology solutions that are part of TIS TECH's offering for different industrial and business scenarios.",
+      "visualAlt": "Advantech technology solutions applied to different industries",
+      "items": {
+        "edgeAI": {
+          "title": "Edge AI Computing Solutions",
+          "description": "Edge AI computing solutions designed to process information and enable artificial intelligence capabilities directly where data is generated."
+        },
+        "industrialEquipment": {
+          "title": "Industrial Equipment Manufacturers",
+          "description": "Technologies for industrial equipment manufacturers that need to integrate computing, connectivity and intelligent capabilities into their products."
+        },
+        "iRetail": {
+          "title": "iRetail and iCity Services",
+          "description": "Technologies for developing smart experiences and services for retail, urban spaces and connected environments."
+        },
+        "intelligentTransportation": {
+          "title": "Intelligent Transportation Systems",
+          "description": "Technology solutions for intelligent transportation systems, connecting infrastructure, devices and data for more efficient operations."
+        },
+        "embedded": {
+          "title": "Embedded Solutions and Redesign Services",
+          "description": "Embedded solutions and redesign services to develop, adapt and evolve technology systems for specific applications."
+        }
+      }
+    },
+    "technologies": {
+      "eyebrow": "Technology portfolio",
+      "title": "Advantech Technologies",
+      "description": "Technology categories available within the TIS TECH offering.",
+      "label": "Advantech Technology",
+      "items": {
+        "panelPC": {
+          "title": "Panel PCs",
+          "description": "Industrial equipment combining computing and visualization for industrial applications and operational environments."
+        },
+        "industrialEthernet": {
+          "title": "Industrial Ethernet Switches",
+          "description": "Ethernet connectivity infrastructure designed for industrial networks and demanding environments."
+        },
+        "protocolGateway": {
+          "title": "Industrial Protocol Gateways",
+          "description": "Technologies for connecting industrial devices and systems using different communication protocols."
+        },
+        "energyPower": {
+          "title": "Energy and Power",
+          "description": "Technologies for monitoring, managing and operating energy and power systems."
+        },
+        "wirelessSensors": {
+          "title": "Wireless I/O and Sensors",
+          "description": "Solutions for capturing field information and connecting devices and sensors wirelessly."
+        },
+        "gatewayRTU": {
+          "title": "Gateways and RTUs",
+          "description": "Solutions for connecting remote equipment, acquiring data and enabling communication with supervisory and control systems."
+        }
+      }
+    },
+    "cta": {
+      "eyebrow": "Have a project?",
+      "title": "Find the right technology for your project",
+      "description": "Contact TIS TECH to discuss your needs and find the right Advantech solution for your environment.",
+      "button": "Contact TIS TECH"
+    },
+    "back": "Back to Strategic Partners"
+  }
+}

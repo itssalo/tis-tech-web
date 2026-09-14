@@ -1,16 +1,18 @@
-import { companyInfo } from "@/data/company";
-import { contactInfo } from "@/data/contact";
+import { useTranslations } from "next-intl";
 
 const footerLinks = [
-  { label: "Quiénes Somos", href: "#about" },
-  { label: "Soluciones", href: "#solutions" },
-  { label: "Socios", href: "#partners" },
-  { label: "Productos", href: "#products" },
-  { label: "Países", href: "#countries" },
-  { label: "Contacto", href: "#contact" },
-];
+  { key: "about", href: "#about" },
+  { key: "solutions", href: "#solutions" },
+  { key: "partners", href: "#partners" },
+  { key: "products", href: "#products" },
+  { key: "countries", href: "#countries" },
+  { key: "contact", href: "#contact" },
+] as const;
 
 export default function Footer() {
+  const t = useTranslations("footer");
+  const company = useTranslations("company");
+
   return (
     <footer className="border-t border-border bg-background">
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -20,24 +22,24 @@ export default function Footer() {
               href="#inicio"
               className="text-2xl font-bold tracking-wide text-foreground hover:text-primary transition-colors"
             >
-              {companyInfo.name}
+              {company("name")}
             </a>
 
             <p className="mt-4 max-w-md text-foreground/70 leading-relaxed">
-              {companyInfo.slogan}
+              {company("slogan")}
             </p>
 
             <a
-              href={`mailto:${contactInfo.email}`}
+              href={`mailto:${t("email")}`}
               className="inline-block mt-6 text-primary font-medium hover:text-secondary transition-colors"
             >
-              {contactInfo.email}
+              {t("email")}
             </a>
           </div>
 
           <div className="md:text-right">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-5">
-              Navegación
+              {t("navigation")}
             </h3>
 
             <nav className="flex flex-col md:items-end gap-3">
@@ -51,7 +53,7 @@ export default function Footer() {
                       : "text-foreground/70 hover:text-secondary"
                   }`}
                 >
-                  {link.label}
+                  {t(`links.${link.key}`)}
                 </a>
               ))}
             </nav>
@@ -60,8 +62,8 @@ export default function Footer() {
 
         <div className="mt-10 pt-6 border-t border-border">
           <div className="text-sm text-foreground/50 text-center space-y-1">
-            <p>TIS TECH SOLUTIONS LLC.</p>
-            <p>1057 NW 136th Ave, Miami, FL 33182</p>
+            <p>{t("company")}</p>
+            <p>{t("address")}</p>
           </div>
         </div>
       </div>

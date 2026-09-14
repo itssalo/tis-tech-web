@@ -1,11 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
-import { solutions } from "@/data/solutions";
+const solutionKeys = [
+  "industrialServers",
+  "security",
+  "industrialConnectivity",
+  "wirelessConnectivity",
+  "iiot",
+  "cellularConnectivity",
+] as const;
 
 export default function Solutions() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  const t = useTranslations("solutions");
 
   return (
     <section
@@ -14,19 +24,17 @@ export default function Solutions() {
     >
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-slate-900 dark:text-white mb-6">
-          Soluciones
+          {t("title")}
         </h2>
 
         <p className="text-center text-slate-600 dark:text-slate-400 max-w-4xl mx-auto mb-16">
-          Integramos tecnologías de conectividad, infraestructura y
-          automatización industrial para acompañar la transformación digital
-          de nuestros clientes.
+          {t("description")}
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {solutions.map((solution, index) => (
+          {solutionKeys.map((key, index) => (
             <div
-              key={solution.title}
+              key={key}
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
               className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-2xl p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
@@ -40,11 +48,11 @@ export default function Solutions() {
               }}
             >
               <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
-                {solution.title}
+                {t(`items.${key}.title`)}
               </h3>
 
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                {solution.description}
+                {t(`items.${key}.description`)}
               </p>
             </div>
           ))}

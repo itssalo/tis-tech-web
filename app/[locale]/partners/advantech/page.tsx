@@ -3,84 +3,79 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-const solutions = [
-  {
-    number: "01",
-    title: "Soluciones de Computación Edge AI",
-    description:
-      "Soluciones de computación Edge AI para procesar información y habilitar capacidades de inteligencia artificial directamente en el entorno donde se generan los datos.",
-  },
-  {
-    number: "02",
-    title: "Fabricantes de Equipamiento Industrial",
-    description:
-      "Tecnologías orientadas a fabricantes de equipamiento industrial que necesitan integrar computación, conectividad y capacidades inteligentes en sus equipos.",
-  },
-  {
-    number: "03",
-    title: "iRetail y Servicios iCity",
-    description:
-      "Tecnologías para desarrollar experiencias y servicios inteligentes orientados a retail, espacios urbanos y entornos conectados.",
-  },
-  {
-    number: "04",
-    title: "Sistemas de Transporte Inteligente",
-    description:
-      "Soluciones tecnológicas para sistemas de transporte inteligente, conectando infraestructura, dispositivos y datos para operaciones más eficientes.",
-  },
-  {
-    number: "05",
-    title: "Soluciones Embebidas y Servicios de Rediseño",
-    description:
-      "Soluciones embebidas y servicios de rediseño para desarrollar, adaptar y evolucionar sistemas tecnológicos destinados a aplicaciones específicas.",
-  },
-];
-
-const technologies = [
-  {
-    title: "Paneles PC",
-    description:
-      "Equipos industriales que integran computación y visualización para aplicaciones industriales y entornos operativos.",
-    image: "/images/partners/advantech/panel-pc.png",
-  },
-  {
-    title: "Switches Ethernet Industriales",
-    description:
-      "Infraestructura de conectividad Ethernet diseñada para redes industriales y entornos exigentes.",
-    image: "/images/partners/advantech/industrial-ethernet-switch.png",
-  },
-  {
-    title: "Gateways de Protocolos Industriales",
-    description:
-      "Tecnologías para conectar dispositivos y sistemas industriales que utilizan diferentes protocolos de comunicación.",
-    image: "/images/partners/advantech/industrial-protocol-gateway.png",
-  },
-  {
-    title: "Energía y Potencia",
-    description:
-      "Tecnologías orientadas a aplicaciones relacionadas con monitoreo, gestión y operación de sistemas de energía y potencia.",
-    image: "/images/partners/advantech/energy-power.png",
-  },
-  {
-    title: "E/S Inalámbrica y Sensores",
-    description:
-      "Soluciones para capturar información de campo y conectar dispositivos y sensores de manera inalámbrica.",
-    image: "/images/partners/advantech/wireless-io-sensors.png",
-  },
-  {
-    title: "Gateways y RTU",
-    description:
-      "Soluciones para conectar equipos remotos, adquirir datos y facilitar la comunicación con sistemas de supervisión y control.",
-    image: "/images/partners/advantech/gateway-rtu.jpg",
-  },
-];
+import { useLocale, useTranslations } from "next-intl";
 
 export default function AdvantechPage() {
   const [hoveredSolution, setHoveredSolution] = useState<number | null>(null);
   const [hoveredTechnology, setHoveredTechnology] = useState<number | null>(
     null,
   );
+
+  const t = useTranslations("advantech");
+  const locale = useLocale();
+
+  const solutions = [
+    {
+      number: "01",
+      title: t("solutions.items.edgeAI.title"),
+      description: t("solutions.items.edgeAI.description"),
+    },
+    {
+      number: "02",
+      title: t("solutions.items.industrialEquipment.title"),
+      description: t("solutions.items.industrialEquipment.description"),
+    },
+    {
+      number: "03",
+      title: t("solutions.items.iRetail.title"),
+      description: t("solutions.items.iRetail.description"),
+    },
+    {
+      number: "04",
+      title: t("solutions.items.intelligentTransportation.title"),
+      description: t("solutions.items.intelligentTransportation.description"),
+    },
+    {
+      number: "05",
+      title: t("solutions.items.embedded.title"),
+      description: t("solutions.items.embedded.description"),
+    },
+  ];
+
+  const technologies = [
+    {
+      title: t("technologies.items.panelPC.title"),
+      description: t("technologies.items.panelPC.description"),
+      image: "/images/partners/advantech/panel-pc.png",
+    },
+    {
+      title: t("technologies.items.industrialEthernet.title"),
+      description: t("technologies.items.industrialEthernet.description"),
+      image: "/images/partners/advantech/industrial-ethernet-switch.png",
+    },
+    {
+      title: t("technologies.items.protocolGateway.title"),
+      description: t("technologies.items.protocolGateway.description"),
+      image: "/images/partners/advantech/industrial-protocol-gateway.png",
+    },
+    {
+      title: t("technologies.items.energyPower.title"),
+      description: t("technologies.items.energyPower.description"),
+      image: "/images/partners/advantech/energy-power.png",
+    },
+    {
+      title: t("technologies.items.wirelessSensors.title"),
+      description: t("technologies.items.wirelessSensors.description"),
+      image: "/images/partners/advantech/wireless-io-sensors.png",
+    },
+    {
+      title: t("technologies.items.gatewayRTU.title"),
+      description: t("technologies.items.gatewayRTU.description"),
+      image: "/images/partners/advantech/gateway-rtu.jpg",
+    },
+  ];
+
+  const homePath = locale === "es" ? "/" : "/en";
 
   return (
     <main className="min-h-screen bg-white text-slate-900 dark:bg-black dark:text-white">
@@ -90,7 +85,7 @@ export default function AdvantechPage() {
           {/* Intro */}
           <div className="mb-10 text-center sm:mb-12">
             <span className="mb-5 inline-flex items-center rounded-full bg-[#02A8E2]/10 px-4 py-2 text-sm font-semibold text-[#02A8E2] dark:bg-[#02A8E2]/20 dark:text-[#02A8E2]">
-              Partner estratégico de TIS TECH
+              {t("hero.badge")}
             </span>
 
             <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
@@ -98,9 +93,7 @@ export default function AdvantechPage() {
             </h1>
 
             <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg md:text-xl">
-              Tecnologías y soluciones Advantech ofrecidas por TIS TECH para
-              aplicaciones industriales, conectividad, computación Edge e
-              infraestructura tecnológica.
+              {t("hero.description")}
             </p>
           </div>
 
@@ -109,7 +102,7 @@ export default function AdvantechPage() {
             <div className="relative aspect-[16/9] overflow-hidden sm:aspect-[16/7]">
               <Image
                 src="/images/partners/advantech/portfolio-advantech.jpeg"
-                alt="Portfolio de soluciones y productos Advantech"
+                alt={t("hero.portfolioAlt")}
                 fill
                 priority
                 className="object-cover object-center sm:object-contain sm:p-8 md:p-12"
@@ -119,7 +112,7 @@ export default function AdvantechPage() {
 
             <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between bg-black/75 px-3 py-2 backdrop-blur-sm sm:px-8 sm:py-4">
               <span className="text-xs font-semibold text-white sm:text-sm sm:text-base">
-                Tecnología industrial para un mundo inteligente
+                {t("hero.portfolioCaption")}
               </span>
 
               <span className="hidden text-xs font-medium uppercase tracking-wider text-white/70 sm:block">
@@ -136,16 +129,15 @@ export default function AdvantechPage() {
           {/* Solutions intro */}
           <div className="mb-10 max-w-3xl sm:mb-12">
             <span className="mb-3 block text-sm font-semibold uppercase tracking-wider text-[#02A8E2]">
-              Soluciones
+              {t("solutions.eyebrow")}
             </span>
 
             <h2 className="mb-5 text-3xl font-bold tracking-tight sm:text-4xl">
-              Tecnología aplicada a diferentes industrias
+              {t("solutions.title")}
             </h2>
 
             <p className="text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
-              Soluciones tecnológicas Advantech que forman parte de la oferta
-              de TIS TECH para distintos escenarios industriales y de negocio.
+              {t("solutions.description")}
             </p>
           </div>
 
@@ -154,7 +146,7 @@ export default function AdvantechPage() {
             <div className="mx-auto max-w-[950px]">
               <Image
                 src="/images/partners/advantech/soluciones.png"
-                alt="Soluciones tecnológicas Advantech aplicadas a diferentes industrias"
+                alt={t("solutions.visualAlt")}
                 width={1640}
                 height={896}
                 className="h-auto w-full"
@@ -210,16 +202,15 @@ export default function AdvantechPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 text-center">
             <span className="mb-3 block text-sm font-semibold uppercase tracking-wider text-[#F36454]">
-              Portfolio tecnológico
+              {t("technologies.eyebrow")}
             </span>
 
             <h2 className="mb-5 text-3xl font-bold tracking-tight sm:text-4xl">
-              Tecnologías Advantech
+              {t("technologies.title")}
             </h2>
 
             <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
-              Categorías tecnológicas disponibles dentro de la propuesta de
-              TIS TECH.
+              {t("technologies.description")}
             </p>
           </div>
 
@@ -262,7 +253,7 @@ export default function AdvantechPage() {
                     />
 
                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-500">
-                      Tecnología Advantech
+                      {t("technologies.label")}
                     </span>
                   </div>
 
@@ -284,23 +275,22 @@ export default function AdvantechPage() {
       <section className="px-6 pb-20 pt-4">
         <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-primary/20 bg-primary/5 px-6 py-12 text-center dark:border-primary/30 dark:bg-primary/10 sm:px-10">
           <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-primary">
-            ¿Tenés un proyecto?
+            {t("cta.eyebrow")}
           </span>
 
           <h2 className="mb-5 text-3xl font-bold sm:text-4xl">
-            Encontrá la tecnología adecuada para tu proyecto
+            {t("cta.title")}
           </h2>
 
           <p className="mx-auto mb-8 max-w-2xl leading-relaxed text-slate-600 dark:text-slate-400">
-            Contactá a TIS TECH para analizar tu necesidad y encontrar la
-            solución Advantech adecuada para tu entorno.
+            {t("cta.description")}
           </p>
 
           <Link
-            href="/#contact"
+            href={`${homePath}#contact`}
             className="inline-flex items-center rounded-xl bg-primary px-7 py-3.5 font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover hover:shadow-lg"
           >
-            Contactar con TIS TECH
+            {t("cta.button")}
             <span className="ml-2 transition-transform duration-300 hover:translate-x-1">
               →
             </span>
@@ -311,10 +301,10 @@ export default function AdvantechPage() {
       {/* Back */}
       <div className="px-6 pb-16 text-center">
         <Link
-          href="/#partners"
+          href={`${homePath}#partners`}
           className="inline-flex items-center font-medium text-primary transition-colors hover:text-primary-hover"
         >
-          ← Volver a Socios Estratégicos
+          ← {t("back")}
         </Link>
       </div>
     </main>

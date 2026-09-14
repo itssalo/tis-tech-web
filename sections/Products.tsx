@@ -2,12 +2,33 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import { productAreas, productBrands } from "@/data/products";
+
+const productAreaKeys = [
+  "storage",
+  "networking",
+  "datacenter",
+  "ups",
+  "structuredCabling",
+  "security",
+  "wireless",
+  "itEquipment",
+  "trainingImplementation",
+  "telecommunications",
+  "ftthGpon",
+  "industrialConnectivity",
+  "iiot",
+  "industrialComputers",
+  "cellularConnectivity",
+] as const;
 
 export default function Products() {
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
   const [hoveredBrand, setHoveredBrand] = useState<number | null>(null);
+
+  const t = useTranslations("products");
 
   const handleProductClick = (area: string) => {
     sessionStorage.setItem("selectedProduct", area);
@@ -31,13 +52,11 @@ export default function Products() {
     >
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-slate-900 dark:text-white mb-6">
-          Línea de Productos
+          {t("title")}
         </h2>
 
         <p className="text-center text-slate-600 dark:text-slate-400 max-w-4xl mx-auto mb-16">
-          Nos especializamos en soluciones tecnológicas que abarcan
-          infraestructura, conectividad, seguridad y equipamiento para
-          empresas e industrias.
+          {t("description")}
         </p>
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
@@ -59,7 +78,7 @@ export default function Products() {
               }}
             >
               <span className="font-medium text-slate-800 dark:text-slate-200">
-                {area}
+                {t(`areas.${productAreaKeys[index]}`)}
               </span>
             </button>
           ))}
@@ -67,13 +86,11 @@ export default function Products() {
 
         <div className="text-center">
           <h3 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
-            Marcas Asociadas
+            {t("brandsTitle")}
           </h3>
 
           <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-10">
-            Trabajamos con fabricantes y referentes tecnológicos para ofrecer
-            soluciones confiables y adaptadas a las necesidades de cada
-            proyecto.
+            {t("brandsDescription")}
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">

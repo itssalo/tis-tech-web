@@ -1,13 +1,12 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 export const alt = "TIS TECH | Soluciones Tecnológicas";
 export const size = {
   width: 1200,
   height: 630,
 };
-
 export const contentType = "image/png";
 
 export default function OpenGraphImage() {
@@ -20,88 +19,26 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          padding: "80px",
           background: "#ffffff",
-          padding: "70px 85px",
+          color: "#343A40",
           fontFamily: "Arial, Helvetica, sans-serif",
         }}
       >
-        {/* Brand mark */}
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            marginBottom: "45px",
+            flexDirection: "column",
+            gap: "24px",
           }}
         >
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
-              gap: "8px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                gap: "8px",
-              }}
-            >
-              <div
-                style={{
-                  width: "42px",
-                  height: "42px",
-                  background: "#02A8E2",
-                }}
-              />
-
-              <div
-                style={{
-                  width: "42px",
-                  height: "42px",
-                  background: "#ffffff",
-                }}
-              />
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                gap: "8px",
-              }}
-            >
-              <div
-                style={{
-                  width: "42px",
-                  height: "42px",
-                  background: "#8A98A3",
-                }}
-              />
-
-              <div
-                style={{
-                  width: "42px",
-                  height: "42px",
-                  background: "#F36454",
-                }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Brand */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "72px",
-              fontWeight: 800,
-              letterSpacing: "-2px",
-              color: "#343A40",
-              lineHeight: 1,
+              fontSize: "28px",
+              fontWeight: 700,
+              color: "#02A8E2",
+              letterSpacing: "2px",
             }}
           >
             TIS TECH
@@ -109,10 +46,11 @@ export default function OpenGraphImage() {
 
           <div
             style={{
-              marginTop: "18px",
-              fontSize: "32px",
-              fontWeight: 500,
-              color: "#02A8E2",
+              display: "flex",
+              fontSize: "58px",
+              fontWeight: 700,
+              lineHeight: 1.1,
+              maxWidth: "950px",
             }}
           >
             Soluciones Tecnológicas
@@ -120,41 +58,58 @@ export default function OpenGraphImage() {
 
           <div
             style={{
-              marginTop: "28px",
-              width: "760px",
-              fontSize: "24px",
+              display: "flex",
+              fontSize: "30px",
               lineHeight: 1.4,
-              color: "#8A98A3",
+              color: "#6F7B84",
+              maxWidth: "900px",
             }}
           >
-            Integramos tecnología y servicios para empresas e industrias.
+            Integramos Tecnología para Transformar Negocios
           </div>
         </div>
 
-        {/* Accent line */}
         <div
           style={{
             display: "flex",
             position: "absolute",
-            left: "85px",
             bottom: "70px",
-            width: "1030px",
+            left: "80px",
+            right: "80px",
             height: "6px",
+            gap: "12px",
           }}
         >
           <div
             style={{
-              width: "65%",
+              display: "flex",
+              flex: 1,
               background: "#02A8E2",
+              borderRadius: "6px",
             }}
           />
 
           <div
             style={{
-              width: "35%",
+              display: "flex",
+              width: "180px",
               background: "#F36454",
+              borderRadius: "6px",
             }}
           />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            position: "absolute",
+            bottom: "30px",
+            right: "80px",
+            fontSize: "20px",
+            color: "#8A98A3",
+          }}
+        >
+          tistechsolutions.com
         </div>
       </div>
     ),

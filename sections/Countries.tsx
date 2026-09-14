@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
-const countries = [
+const countryKeys = [
   "Argentina",
   "Bolivia",
   "Chile",
@@ -11,19 +12,23 @@ const countries = [
   "Costa Rica",
   "Ecuador",
   "El Salvador",
-  "Estados Unidos",
+  "United States",
   "Guatemala",
   "Honduras",
   "Nicaragua",
-  "Panamá",
+  "Panama",
   "Paraguay",
-  "Perú",
-  "República Dominicana",
+  "Peru",
+  "Dominican Republic",
   "Uruguay",
-];
+] as const;
 
 export default function Countries() {
   const [hoveredCountry, setHoveredCountry] = useState<number | null>(null);
+
+  const t = useTranslations("countries");
+
+  const countries = t.raw("items") as string[];
 
   return (
     <section
@@ -34,12 +39,11 @@ export default function Countries() {
         {/* Header */}
         <div className="mx-auto mb-12 max-w-4xl text-center">
           <h2 className="mb-6 text-4xl font-bold tracking-tight text-slate-900 dark:text-white md:text-5xl">
-            Países
+            {t("title")}
           </h2>
 
           <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-400 md:text-lg">
-            Trabajamos con empresas e industrias en distintos mercados del
-            mundo.
+            {t("description")}
           </p>
         </div>
 
@@ -47,7 +51,7 @@ export default function Countries() {
         <div className="mx-auto mb-14 grid max-w-6xl grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {countries.map((country, index) => (
             <article
-              key={country}
+              key={countryKeys[index]}
               onMouseEnter={() => setHoveredCountry(index)}
               onMouseLeave={() => setHoveredCountry(null)}
               className="flex min-h-[92px] items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900"
@@ -81,23 +85,22 @@ export default function Countries() {
         {/* CTA */}
         <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-primary/20 bg-primary/5 px-6 py-12 text-center dark:border-primary/30 dark:bg-primary/10 sm:px-10 sm:py-14">
           <span className="mb-4 block text-sm font-semibold uppercase tracking-wider text-primary">
-            ¿Trabajás en alguno de estos mercados?
+            {t("ctaEyebrow")}
           </span>
 
           <h3 className="mb-5 text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
-            Hablemos de tu próximo proyecto
+            {t("ctaTitle")}
           </h3>
 
           <p className="mx-auto mb-8 max-w-2xl leading-relaxed text-slate-600 dark:text-slate-400">
-            Contactanos para conocer nuestras soluciones y analizar cómo
-            podemos acompañar las necesidades de tu empresa.
+            {t("ctaDescription")}
           </p>
 
           <Link
             href="#contact"
             className="inline-flex items-center rounded-xl bg-primary px-7 py-3.5 font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary-hover hover:shadow-lg"
           >
-            Contactar con TIS TECH
+            {t("ctaButton")}
             <span className="ml-2 text-lg transition-transform duration-300 hover:translate-x-1">
               →
             </span>
