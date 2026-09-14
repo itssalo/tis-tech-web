@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const partnerKeys = ["hpe", "adata"] as const;
 
@@ -36,6 +36,8 @@ export default function Partners() {
 
   const [isAdvantechHovered, setIsAdvantechHovered] = useState(false);
 
+  const locale = useLocale();
+
   const t = useTranslations("partners");
   const partnerData = useTranslations("partnerData");
 
@@ -62,7 +64,11 @@ export default function Partners() {
 
         {/* Advantech featured partner */}
         <Link
-          href="/partners/advantech"
+          href={
+            locale === "en"
+              ? "/en/partners/advantech"
+              : "/partners/advantech"
+          }
           onMouseEnter={() => setIsAdvantechHovered(true)}
           onMouseLeave={() => setIsAdvantechHovered(false)}
           className="group mb-14 block overflow-hidden rounded-3xl border border-[#02A8E2]/30 bg-white shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl dark:border-[#02A8E2]/40 dark:bg-zinc-950"
